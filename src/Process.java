@@ -6,14 +6,20 @@ class Process {
         size = init_size;
         name = init_name;
 
-        Memory.malloc(this);
+        try {
+            Memory.malloc(this);
+        } catch (OutOfMemoryException ignored) {
+        }
     }
 
     int getSize() {
         return size;
     }
 
-    public void exit() {
-        Memory.free(this);
+    void exit() {
+        try {
+            Memory.free(this);
+        } catch (ProcessNotFoundException ignored) {
+        }
     }
 }

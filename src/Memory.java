@@ -19,8 +19,9 @@ class Memory {
         return main_memory;
     }
 
-    static void malloc(Process new_process) {
-        if (new_process.getSize() > current_size) {
+    static void malloc(Process new_process)
+            throws OutOfMemoryException {
+        if (new_process.getSize() < (max_size - current_size)) {
             storage.add(new_process);
 
             current_size = current_size - new_process.getSize();
@@ -28,10 +29,13 @@ class Memory {
             if (current_size == 0) {
                 setFree(false);
             }
+        } else {
+            throw new OutOfMemoryException();
         }
     }
 
-    static void free(Process old_process) {
+    static void free(Process old_process)
+            throws ProcessNotFoundException {
         if (storage.contains(old_process)) {
             storage.remove(old_process);
 
@@ -40,6 +44,8 @@ class Memory {
             if (current_size > 0) {
                 setFree(true);
             }
+        } else {
+            throw new ProcessNotFoundException();
         }
     }
 
