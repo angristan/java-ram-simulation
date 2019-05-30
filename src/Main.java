@@ -1,8 +1,5 @@
-class Main
-{
-    public static void main(String[] args)
-    {
-
+class Main {
+    public static void main(String[] args) {
         System.out.println(Memory.getStorage());
 
         Process p = new Process(2, "test");
@@ -14,4 +11,4 @@ class Main
 
         System.out.println(Memory.getStorage());
     }
-} 
+}
