@@ -1,11 +1,10 @@
 import java.util.ArrayList;
-import java.util.List;
 
 class Memory {
     private static Memory mainMemory = new Memory();
     private static int maxSize;
     private static int currentSize;
-    private static List<Process> storage;
+    private static ArrayList<Process> storage;
     private static boolean free;
 
     private Memory() {
@@ -49,7 +48,7 @@ class Memory {
         }
     }
 
-    static List<Process> getStorage() {
+    static ArrayList<Process> getStorage() {
         return storage;
     }
 
