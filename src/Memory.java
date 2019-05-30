@@ -18,31 +18,31 @@ class Memory {
         return mainMemory;
     }
 
-    static void malloc(Process newProcess)
-            throws OutOfMemoryException {
+    static void malloc(Process newProcess) throws OutOfMemoryException {
         if (newProcess.getSize() < (maxSize - currentSize)) {
             storage.add(newProcess);
 
-            currentSize = currentSize - newProcess.getSize();
+            currentSize -= newProcess.getSize();
 
             if (currentSize == 0) {
                 setFree(false);
             }
+
         } else {
             throw new OutOfMemoryException();
         }
     }
 
-    static void free(Process oldProcess)
-            throws ProcessNotFoundException {
+    static void free(Process oldProcess) throws ProcessNotFoundException {
         if (storage.contains(oldProcess)) {
             storage.remove(oldProcess);
 
-            currentSize = currentSize + oldProcess.getSize();
+            currentSize += oldProcess.getSize();
 
             if (currentSize > 0) {
                 setFree(true);
             }
+
         } else {
             throw new ProcessNotFoundException();
         }
