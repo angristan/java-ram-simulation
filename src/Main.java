@@ -1,24 +1,22 @@
 class Main {
     public static void main(String[] args) {
-        System.out.println(Memory.getStorage());
+        System.out.println("Memory size max: " + Memory.maxSize + "GB");
 
-        Process p = new Process(2, "test");
-        Process p2 = new Process(10, "toobig");
+        System.out.println("Actual state: " + Memory.getStorage());
 
-        try {
-            Memory.execute(p);
-        } catch (OutOfMemoryException ignored) {
-        }
+        Process p = new Process(2, "First Program");
+        Process p2 = new Process(10, "Second Program");
 
-        try {
-            Memory.execute(p2);
-        } catch (OutOfMemoryException ignored) {
-        }
+        System.out.println("\nFirst program execution (" + p.getSize() + "GB)");
+        p.execute();
+        System.out.println("Second program execution (" + p2.getSize() + "GB)");
+        p2.execute();
 
-        System.out.println(Memory.getStorage());
+        System.out.println("\nActual state: " + Memory.getStorage());
 
+        System.out.println("\nQuit first program");
         p.exit();
 
-        System.out.println(Memory.getStorage());
+        System.out.println("\nActual state: " + Memory.getStorage());
     }
 }
