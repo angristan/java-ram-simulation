@@ -4,15 +4,26 @@ class Process {
     private int id;
     private static int lastID = 0;
 
-    Process(int initSize, String initName) {
+    public Process(int initSize, String initName) {
         size = initSize;
         name = initName;
-        lastID++;
-        id = lastID;
+        id = ++lastID;
     }
 
-    int getSize() {
+    public int getSize() {
         return size;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void execute() {
@@ -22,14 +33,10 @@ class Process {
         }
     }
 
-    void exit() {
+    public void exit() {
         try {
             Memory.free(this);
         } catch (ProcessNotFoundException ignored) {
         }
-    }
-
-    public int getId() {
-        return id;
     }
 }

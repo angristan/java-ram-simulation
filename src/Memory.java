@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 class Memory {
     private static Memory mainMemory = new Memory();
-    public static int maxSize;
+    private static int maxSize;
     private static int currentSize;
     private static ArrayList<Process> storage;
     private static boolean free;
@@ -18,7 +18,7 @@ class Memory {
         return mainMemory;
     }
 
-    static void malloc(Process newProcess) throws OutOfMemoryException {
+    public static void malloc(Process newProcess) throws OutOfMemoryException {
         if (newProcess.getSize() < (maxSize - currentSize)) {
             storage.add(newProcess);
 
@@ -33,7 +33,7 @@ class Memory {
         }
     }
 
-    static void free(Process oldProcess) throws ProcessNotFoundException {
+    public static void free(Process oldProcess) throws ProcessNotFoundException {
         if (storage.contains(oldProcess)) {
             storage.remove(oldProcess);
 
@@ -48,12 +48,16 @@ class Memory {
         }
     }
 
-    static ArrayList<Process> getStorage() {
+    public static ArrayList<Process> getStorage() {
         return storage;
     }
 
-    private static void setFree(boolean free) {
+    public static void setFree(boolean free) {
         Memory.free = free;
+    }
+
+    public static boolean isFree() {
+        return free;
     }
 
     public static int getmaxSize() {
