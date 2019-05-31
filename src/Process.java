@@ -5,11 +5,6 @@ class Process {
     Process(int initSize, String initName) {
         size = initSize;
         name = initName;
-
-        try {
-            Memory.malloc(this);
-        } catch (OutOfMemoryException ignored) {
-        }
     }
 
     int getSize() {

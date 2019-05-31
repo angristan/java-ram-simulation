@@ -18,18 +18,21 @@ class Memory {
         return mainMemory;
     }
 
-    static void malloc(Process newProcess) throws OutOfMemoryException {
+    static void execute(Process newProcess) throws OutOfMemoryException {
         if (newProcess.getSize() < (maxSize - currentSize)) {
-            storage.add(newProcess);
-
-            currentSize -= newProcess.getSize();
-
-            if (currentSize == 0) {
-                setFree(false);
-            }
-
+            malloc(newProcess);
         } else {
             throw new OutOfMemoryException();
+        }
+    }
+
+    static void malloc(Process newProcess) {
+        storage.add(newProcess);
+
+        currentSize -= newProcess.getSize();
+
+        if (currentSize == 0) {
+            setFree(false);
         }
     }
 

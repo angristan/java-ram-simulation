@@ -5,6 +5,16 @@ class Main {
         Process p = new Process(2, "test");
         Process p2 = new Process(10, "toobig");
 
+        try {
+            Memory.execute(p);
+        } catch (OutOfMemoryException ignored) {
+        }
+
+        try {
+            Memory.execute(p2);
+        } catch (OutOfMemoryException ignored) {
+        }
+
         System.out.println(Memory.getStorage());
 
         p.exit();
